@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ReactJS + Bootstrap</title>
+  <!-- CDN ReactJs -->
+  <script src="https://unpkg.com/react@17/umd/react.development.js"
+crossorigin></script>
+ <script src="https://unpkg.com/react-dom@17/umd/react-
+dom.development.js" crossorigin></script>
+ <script 
+src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="bootstrap/bootstrap.min.css">
+  <style>
+  </style>
+</head>
+
+<body class="container">
+  <div id="app"></div>
+  
+  <!-- ReactJS -->
+  <script type="text/babel">
+  // Components
+  class FirstComponent extends React.Component {
+    constructor() {
+      super();
+      
+      this.state = {
+        username: "",
+        password: ""
+      }
+      
+      this.showPassword = this.showPassword.bind(this);
+      this.hidePassword = this.hidePassword.bind(this);
+      this.setUsername = this.setUsername.bind(this);
+      this.setPassword = this.setPassword.bind(this);
+    }
+    
+    showPassword() {
+      const input = document.getElementById('password');
+      if (input.type = 'password') {
+        document.getElementById('password').type = 'text';
+        document.getElementById('hide-eye').classList.add('d-inline');
+        document.getElementById('hide-eye').classList.remove('d-none');
+        document.getElementById('show-eye').classList.add('d-none');
+      }
+      else {
+        // Do nothing
+      }
+    }
+    hidePassword() {
+      const input = document.getElementById('password');
+      if (input.type = 'text') {
+        document.getElementById('password').type = 'password';
+        document.getElementById('hide-eye').classList.add('d-none');
+        document.getElementById('show-eye').classList.remove('d-none');
+        document.getElementById('show-eye'  ).classList.add('d-inline');
+      }
+      else {
+        // Do nothing
+      }
+    }
+    
+    setUsername(event) {
+      const username = event.target.value;
+      this.setState({ username: username });
+    }
+    setPassword(event) {
+      const password = event.target.value;
+      this.setState({ password: password });
+    }
+    
+    render() {
+      return (
+        <form className="mt-5 m-3 rounded mx-auto">
+        <h2 className="m-4">BuyNSell</h2>
+        
+        <p className="m-5 lead">Login into your BuyNSell account</p>
+          <label htmlFor="username" className="form-label">Username:</label>
+          <div className="input-group">
+            <span className="input-group-text">@</span>
+            <input type="text" className="form-control form-control-lg w-75" name="username" id="username" onChange={this.setUsername} required />
+          </div><br />
+          <label htmlFor="password" className="form-label">Password:</label>
+          <div className="input-group">
+            <span className="input-group-text">🔒</span>
+            <input type="password" className="form-control form-control-lg w-50" name="password" id="password" onChange={this.setPassword} required />
+            <span className="input-group-text d-flex justify-content-center" id="show-eye"><img src="icon/eye.svg" alt="Eye" width="25" height="25" onClick={this.showPassword} /></span>
+            <span className="input-group-text d-flex d-none justify-content-center" id="hide-eye"><img src="icon/x.svg" alt="No eye" width="25" height="25" onClick={this.hidePassword} /></span>
+          </div>
+          <div>
+            <span className="text-secondary fs-2">Username: {this.state.username}</span><br />
+            <span className="text-secondary fs-2">Password: {this.state.password}</span>
+          </div>
+          <button type="submit" className="btn btn-primary btn-lg d-block mx-auto mt-4">Login</button>
+        </form>
+      );
+    }  
+  }
+  
+    ReactDOM.render(<FirstComponent />, document.getElementById('app'))
+  </script>
+</body>
+
+</html>
